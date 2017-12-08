@@ -17,6 +17,12 @@ class Item {
 		virtual void use(Grid* g){
 			cout << "Item used!" << endl;
 		};
+		int getPrice(){
+			return price;
+		};
+		string getDes(){
+			return des;
+		}
 	private:
 		int price;
 		string des;

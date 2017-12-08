@@ -18,6 +18,7 @@ class Grid
           int win(char player);
           string view();
           void clear(int col);
+          void block(int col);
       private:
           vector< vector<char> > matrix;
           int rowCount[7];  //row count of the same letter in each column
@@ -49,7 +50,7 @@ int Grid::win (char player) {
     count = 0;
     //checks horizontal
     for(i=0;i<xSize;i++)
-        for(j=0;j<ySize-3;j++)
+        for(j=0;j<ySize-2;j++)
             if(matrix[i][j] != ' ' && matrix[i][j]==matrix[i][j+1] && matrix[i][j]==matrix[i][j+2])
                 count++;
     //checks vertical
@@ -71,7 +72,8 @@ int Grid::win (char player) {
     	int temp;
     	temp = count - pointCount;
 		pointCount = count;
-    	return temp;
+		if (temp >= 1)
+    		return temp;
     }
     return 0;
 }
@@ -79,12 +81,20 @@ bool Grid::insert(char player, int col)
 {
      if (matrix[0][col -1] != ' ')  //check if column is full
      {
-     	if(col>ySize)
-     		cout<<"OOPs, COLUMN "<<col<<" IS OUT OF THE GRID, PLEASE TRY AGAIN\n";
+     	if(col>ySize){
+     		system("CLS");
      		cout<<"OOPS, COLUMN "<<col<<" IS OUT OF THE GRID, PLEASE TRY AGAIN\n";
-     	else
-     		cout<<"OOPs, COLUMN "<<col<<" IS FULL, PLEASE SELECT A DIFFERENT COLUMN\n";
+     		Sleep(1000);
+     		system("CLS");
+     		cout << this->view();
+		 }
+     	else{
+     		system("CLS");
      		cout<<"OOPS, COLUMN "<<col<<" IS FULL, PLEASE SELECT A DIFFERENT COLUMN\n";
+     		Sleep(1000);
+     		system("CLS");
+     		cout << this->view();
+		 }
         return false;
      }
      else
@@ -117,6 +127,11 @@ string Grid::view()
 void Grid::clear(int col){
 	for (int i = 0; i < 6; i++)
 		matrix[i][col - 1] = ' ';
+}
+
+void Grid::block(int col){
+	for (int i = 0; i < 6; i++)
+		matrix[i][col - 1] = 'X';
 }
 
 #endif
