@@ -9,7 +9,7 @@ using namespace std;
 class Blocker: public Item //functions inside Item parent class are shared
 {
 public:
-       Blocker(): Item(2,"this is item allows players to change opposing players marker into their own"){};
+       Blocker(): Item(2,"this is item allows players to block columns off from being used"){};
        
 	       void use(Grid *g)//this class's own version of the use() declared by Item class
 		   {	
